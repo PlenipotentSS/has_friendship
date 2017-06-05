@@ -95,7 +95,7 @@ module HasFriendship
       end
 
       def requested_friend_with?(friend)
-        HasFriendship::Friendship.find_relation(self, friend, status: 0).any?
+        HasFriendship::Friendship.find_relation(self, friend, status: 1).any?
       end
 
       def friends_with?(friend)
