@@ -90,11 +90,11 @@ module HasFriendship
         end
       end
 
-      def pending_friend_with?
+      def pending_friend_with?(friend)
         HasFriendship::Friendship.find_relation(self, friend, status: 0).any?
       end
 
-      def requested_friend_with?
+      def requested_friend_with?(friend)
         HasFriendship::Friendship.find_relation(self, friend, status: 0).any?
       end
 
