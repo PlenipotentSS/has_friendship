@@ -30,7 +30,7 @@ module HasFriendship
                   source: :friend
 
         has_many :pending_requested_friends,
-                -> {where('friendships.status == ? or friendships.status == ? ', 0, 1)},
+                -> {where('friendships.status = ? or friendships.status = ? ', 0, 1)},
                 through: :friendships,
                 source: :friend
 
