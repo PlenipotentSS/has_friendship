@@ -29,6 +29,12 @@ module HasFriendship
                   through: :friendships,
                   source: :friend
 
+        has_many :pending_requested_friends,
+                -> {where('friendships.status == ? or friendships.status == ? ', 0, 1)},
+                through: :friendships,
+                source: :friend
+
+
         def self.friendable?
           true
         end
@@ -82,6 +88,14 @@ module HasFriendship
           yield(self, friend)
           yield(friend, self)
         end
+      end
+
+      def pending_friend_with?
+        HasFriendship::Friendship.find_relation(self, friend, status: 0).any?
+      end
+
+      def requested_friend_with?
+        HasFriendship::Friendship.find_relation(self, friend, status: 0).any?
       end
 
       def friends_with?(friend)
